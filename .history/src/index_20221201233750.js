@@ -59,7 +59,7 @@ function handleHighScoreFormSubmit(e) {
     .then(resp => resp.json())
     .catch(error => console.log(error));
 
-    gameListDetailScore.textContent = highScore;
+    gameListDetailScore.textContent = highScore);
     e.target.reset();
     
 }

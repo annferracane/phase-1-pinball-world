@@ -45,7 +45,7 @@ function displayGameDetails(game) {
 function handleHighScoreFormSubmit(e) {
     e.preventDefault();
 
-    const highScore = e.target.querySelector('#score-input').value;
+    const highScore = parseInt(e.target.querySelector('#score-input').value);
     const configObj = { high_score: highScore };
 
     fetch(`${baseUrl}/${gameListDetailID.textContent}`, {
@@ -59,7 +59,7 @@ function handleHighScoreFormSubmit(e) {
     .then(resp => resp.json())
     .catch(error => console.log(error));
 
-    gameListDetailScore.textContent = highScore;
+    gameListDetailScore.textContent = parseInt(highScore);
     e.target.reset();
     
 }

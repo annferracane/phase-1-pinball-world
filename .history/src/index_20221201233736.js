@@ -46,7 +46,8 @@ function handleHighScoreFormSubmit(e) {
     e.preventDefault();
 
     const highScore = e.target.querySelector('#score-input').value;
-    const configObj = { high_score: highScore };
+
+    const configObj = { high_score: parseInt(highScore) };
 
     fetch(`${baseUrl}/${gameListDetailID.textContent}`, {
         headers : {
@@ -59,7 +60,7 @@ function handleHighScoreFormSubmit(e) {
     .then(resp => resp.json())
     .catch(error => console.log(error));
 
-    gameListDetailScore.textContent = highScore;
+    gameListDetailScore.textContent = parseInt(highScore);
     e.target.reset();
     
 }

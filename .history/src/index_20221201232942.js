@@ -26,47 +26,8 @@ function displayGames(gameData) {
     fetchGameDataDetails(firstGame);
 }
 
-// Fetch data for individual game and show game details
 function fetchGameDataDetails(e) {
     const id = e.id.substr(5);
     const url = `${baseUrl}/${id}`;
     fetchData(url, displayGameDetails);
-}
-
-// Display game data on DOM
-function displayGameDetails(game) {
-    gameListDetailImg.src = game.image;
-    gameListDetailTitle.textContent = game.name;
-    gameListDetailScore.textContent = game.high_score;
-    gameListDetailID.textContent = game.id;
-}
-
-// High score form handler
-function handleHighScoreFormSubmit(e) {
-    e.preventDefault();
-
-    const highScore = e.target.querySelector('#score-input').value;
-    const configObj = { high_score: highScore };
-
-    fetch(`${baseUrl}/${gameListDetailID.textContent}`, {
-        headers : {
-            'Content-Type': 'application/json',
-            'Accept': 'application/json'
-        },
-        method: 'PATCH',
-        body: JSON.stringify(configObj)
-    })
-    .then(resp => resp.json())
-    .catch(error => console.log(error));
-
-    gameListDetailScore.textContent = highScore;
-    e.target.reset();
-    
-}
-
-// Generic fetch function that takes URL and function to act on data received
-function fetchData(url, fn) {
-    fetch(url)
-    .then(resp => resp.json())
-    .then(data => fn(data))
 }

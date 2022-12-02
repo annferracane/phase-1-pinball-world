@@ -44,23 +44,29 @@ function displayGameDetails(game) {
 // High score form handler
 function handleHighScoreFormSubmit(e) {
     e.preventDefault();
-
-    const highScore = e.target.querySelector('#score-input').value;
-    const configObj = { high_score: highScore };
-
-    fetch(`${baseUrl}/${gameListDetailID.textContent}`, {
-        headers : {
-            'Content-Type': 'application/json',
-            'Accept': 'application/json'
-        },
-        method: 'PATCH',
-        body: JSON.stringify(configObj)
-    })
-    .then(resp => resp.json())
-    .catch(error => console.log(error));
-
-    gameListDetailScore.textContent = highScore;
-    e.target.reset();
+    const highScore = parseInt(e.target.querySelector('#score-input').value);
+    if(highScore) {
+        const configObj = {
+            high_score: highScore
+        }
+    
+        fetch(`${baseUrl}/${gameListDetailID.textContent}`, {
+            headers : {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json'
+            },
+            method: 'PATCH',
+            body: JSON.stringify(configObj)
+        })
+        .then(resp => resp.json())
+        .catch(error => console.log(error));
+    
+        gameListDetailScore.textContent = parseInt(highScore);
+        e.target.reset();
+    } else {
+        console.log('High score value cannot be empty.')
+    }
+    
     
 }
 

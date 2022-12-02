@@ -79,7 +79,3 @@ input[type=submit] {
     margin-top: 10px;
     font-family: 'Press Start 2P', cursive;
 }
-
-.hidden {
-    visibility: hidden;
-}

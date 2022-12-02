@@ -41,12 +41,13 @@ function displayGameDetails(game) {
     gameListDetailID.textContent = game.id;
 }
 
-// High score form handler
+
 function handleHighScoreFormSubmit(e) {
     e.preventDefault();
-
-    const highScore = e.target.querySelector('#score-input').value;
-    const configObj = { high_score: highScore };
+    const highScore = parseInt(e.target.querySelector('#score-input').value);
+    const configObj = {
+        high_score: highScore
+    }
 
     fetch(`${baseUrl}/${gameListDetailID.textContent}`, {
         headers : {
@@ -59,14 +60,7 @@ function handleHighScoreFormSubmit(e) {
     .then(resp => resp.json())
     .catch(error => console.log(error));
 
-    gameListDetailScore.textContent = highScore;
+    gameListDetailScore.textContent = parseInt(highScore);
     e.target.reset();
     
-}
-
-// Generic fetch function that takes URL and function to act on data received
-function fetchData(url, fn) {
-    fetch(url)
-    .then(resp => resp.json())
-    .then(data => fn(data))
 }
